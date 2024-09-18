@@ -23,12 +23,16 @@ export class Add extends Component<AddProps> {
                 <div className = "titleInput">
                     <span>Title:</span>
                     <input type="input" placeholder="Enter a title" className="mediaInput"></input>
-                    <button className="submitTitle" type="submit"></button>
+                    <button className="submitTitle" type="submit">
+                        <img src="checkmark-xxl.png" width="20" height="20"></img>
+                    </button>
                 </div>
                 <div className="imageInput">
                     <span>Image:</span>
                     <input type="input" placeholder="Enter an image" className="mediaInput"></input>
-                    <button className="submitTitle" type="submit"></button>
+                    <button className="submitTitle" type="submit">
+                        <img src="checkmark-xxl.png" width="20" height="20"></img>
+                    </button>
                 </div>
                 <div className="container">
                         <img className="image" src="https://gratisography.com/wp-content/uploads/2024/01/gratisography-cyber-kitty-800x525.jpg"></img>
