@@ -1,4 +1,6 @@
 .addReviewButton {
     width: 5vw;
     height: 8vh;
+    border: 4px solid;
+    border-radius: 10px;
 }

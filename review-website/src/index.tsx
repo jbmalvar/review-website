@@ -9,5 +9,5 @@ if (main === null) {
 
 const root: Root = createRoot(main);
 root.render(
-    <ReviewApp />
+    <ReviewApp/>
 );
