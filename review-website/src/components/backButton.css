@@ -9,3 +9,10 @@
     border: 2px solid;
     border-radius: 25px;
 }
+
+.backButton:hover {
+    border: 2px solid;
+    border-color: red;
+    background: white;
+    transform: scale(1.1);
+}

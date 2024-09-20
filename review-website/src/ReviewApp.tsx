@@ -8,18 +8,25 @@ type Page = {kind: "front"} | {kind: "ReviewDetails"};
 type ReviewAppState = {
   show: Page;
   averageScore: number;
+  review: Review;
+}
+
+type Review = {
+  title: string;
+  image: string;
+  score: number;
 }
 
 export class ReviewApp extends Component <{}, ReviewAppState>{
   constructor(props: {}) {
     super(props);
-    this.state = {show: {kind: "front"}, averageScore: 0};
+    this.state = {show: {kind: "front"}, averageScore: 0, review: {title: "", image: "", score: 0}};
   }
   
 
   render = (): JSX.Element => {
     if(this.state.show.kind === "ReviewDetails"){
-      return(<Add back={this.doBackClick}/>);
+      return(<Add back={this.doBackClick} addTitle={this.doTitleConfirmClick}/>);
     } else {
       return (<Home
       addReview={this.doAddReviewClick}/>);
@@ -34,4 +41,7 @@ export class ReviewApp extends Component <{}, ReviewAppState>{
     this.setState({show: {kind: "front"}});
   }
 
+  doTitleConfirmClick = (word: string): void =>{
+    this.setState({review: {title: "Hey", image: "", score: 0}});
+  }
 }

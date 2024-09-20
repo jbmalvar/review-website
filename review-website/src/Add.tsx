@@ -4,12 +4,33 @@ import './Add.css';
 
 type AddProps = {
     back: () => void;
+    addTitle:(word:string)=> void;
 }
 
-export class Add extends Component<AddProps> {
+type AddState = {
+    title: string;
+    image: string;
+    status: string;
+    score: number;
+    characterScore: number;
+    ostScore: number;
+    storyScore: number;
+    artScore: number;
+}
+
+export class Add extends Component<AddProps, AddState> {
     constructor(props: AddProps) {
         super(props);
-        this.state = {};
+        this.state = {
+            title:"",
+            image:"",
+            status:"",
+            characterScore: 0, 
+            ostScore: 0,
+            storyScore: 0,
+            artScore:0,
+            score: 0
+        };
     }
 
     render = (): JSX.Element => {
@@ -17,25 +38,25 @@ export class Add extends Component<AddProps> {
         <div className = "Review">
             <header className="header">
                 <Back onClick={this.doBackClick}/>
-                <span className="title">Something</span>
+                <span className="title">{this.renderTitle()}</span>
             </header>
             <body className = "body">
                 <div className = "titleInput">
                     <span>Title:</span>
-                    <input type="input" placeholder="Enter a title" className="mediaInput"></input>
-                    <button className="submitTitle" type="submit">
+                    <input type="input" id="titleInput" placeholder="Enter a title" className="mediaInput"></input>
+                    <button className="submitTitle" type="submit" onClick={this.doAddTitleClick}>
                         <img src="checkmark-xxl.png" width="20" height="20"></img>
                     </button>
                 </div>
                 <div className="imageInput">
                     <span>Image:</span>
-                    <input type="input" placeholder="Enter an image" className="mediaInput"></input>
-                    <button className="submitTitle" type="submit">
+                    <input type="input" id="imageInput" placeholder="Enter an image" className="mediaInput"></input>
+                    <button className="submitTitle" type="submit" onClick={this.doAddImageClick}>
                         <img src="checkmark-xxl.png" width="20" height="20"></img>
                     </button>
                 </div>
                 <div className="container">
-                        <img className="image" src="https://gratisography.com/wp-content/uploads/2024/01/gratisography-cyber-kitty-800x525.jpg"></img>
+                        <img className="image" src={this.state.image}></img>
                         <div className = "start">
                         <div className="h2">Status:</div>
                             <select className = "dropdown" id="dropdown">
@@ -43,7 +64,7 @@ export class Add extends Component<AddProps> {
                                     <option value = "watching">Watching</option>
                                     <option value = "completed" >Completed</option>
                             </select>
-                            <div className="h2">Score:</div>
+                            <div className="h2">Score: {this.state.score}</div>
                             <div className="h2">Review</div>
                             <div className="reviewStats">
                                 <div className="top">
@@ -134,7 +155,30 @@ export class Add extends Component<AddProps> {
         </div>)
     }
 
+    renderTitle = ():string => {
+        if(this.state.title === ""){
+            return "Enter A Title"
+        } else {
+            return this.state.title;
+        }
+    }
+
     doBackClick = (): void =>{
         this.props.back();
+    }
+
+    doAddTitleClick = (): void =>{
+        this.props.addTitle(this.state.title);
+        const title = document.getElementById("titleInput") as HTMLInputElement
+        this.setState({title: title.value})
+    }
+
+    doAddImageClick = (): void => {
+        const image = document.getElementById("imageInput") as HTMLInputElement
+        this.setState({image: image.value})
+    }
+
+    doCharacterScoreChange = (): void => {
+
     }
 }
