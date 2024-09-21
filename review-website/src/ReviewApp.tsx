@@ -29,7 +29,7 @@ export class ReviewApp extends Component <{}, ReviewAppState>{
       return(<Add 
         back={this.doBackClick}
         addTitle={this.doTitleConfirmClick}
-        image={this.state.review.image}
+        addImage={this.doImageConfirmClick}
         score={this.state.review.score}/>);
     } else {
       return (<Home
@@ -49,6 +49,10 @@ export class ReviewApp extends Component <{}, ReviewAppState>{
   }
 
   doTitleConfirmClick = (word: string): void =>{
-    this.setState({review: {title: word, image: word, score: 0}});
+    this.setState({review: {title: word, image: this.state.review.title, score: this.state.review.score}});
+  }
+
+  doImageConfirmClick = (image: string): void => {
+    this.setState({review: {title: this.state.review.title, image: image, score: this.state.review.score}});
   }
 }

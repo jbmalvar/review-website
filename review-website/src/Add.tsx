@@ -5,7 +5,7 @@ import './Add.css';
 type AddProps = {
     back: () => void;
     addTitle:(word:string)=> void;
-    image:string;
+    addImage:(image:string)=> void;
     score:number;
 }
 
@@ -179,6 +179,7 @@ export class Add extends Component<AddProps, AddState> {
     doAddImageClick = (): void => {
         const image = document.getElementById("imageInput") as HTMLInputElement
         this.setState({image: image.value})
+        this.props.addImage(image.value);
     }
 
     doCharacterScoreChange = (): void => {
