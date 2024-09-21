@@ -1,5 +1,14 @@
 import React, {ChangeEvent, Component} from 'react';
 
-export class ReviewDetails extends Component<{}>{
+type Review = {
+    title: string;
+    image: string;
+    score: number;
+}
 
+export class ReviewDetails extends Component<{}, Review>{
+    constructor(props: {}) {
+        super(props);
+        this.state = {title: "", image: "", score: 0};
+    }
 }

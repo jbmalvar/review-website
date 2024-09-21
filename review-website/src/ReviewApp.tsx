@@ -26,10 +26,17 @@ export class ReviewApp extends Component <{}, ReviewAppState>{
 
   render = (): JSX.Element => {
     if(this.state.show.kind === "ReviewDetails"){
-      return(<Add back={this.doBackClick} addTitle={this.doTitleConfirmClick}/>);
+      return(<Add 
+        back={this.doBackClick}
+        addTitle={this.doTitleConfirmClick}
+        image={this.state.review.image}
+        score={this.state.review.score}/>);
     } else {
       return (<Home
-      addReview={this.doAddReviewClick}/>);
+      addReview={this.doAddReviewClick}
+      title={this.state.review.title}
+      image={this.state.review.image}
+      score={this.state.review.score}/>);
     }
   }
 
@@ -42,6 +49,6 @@ export class ReviewApp extends Component <{}, ReviewAppState>{
   }
 
   doTitleConfirmClick = (word: string): void =>{
-    this.setState({review: {title: "Hey", image: "", score: 0}});
+    this.setState({review: {title: word, image: word, score: 0}});
   }
 }

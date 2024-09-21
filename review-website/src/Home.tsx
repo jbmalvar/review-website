@@ -4,12 +4,21 @@ import './Home.css';
 
 type HomeProps = {
     addReview: () => void;
+    title: string;
+    image: string;
+    score: number;
 }
 
-export class Home extends Component<HomeProps>{
+type ReviewDetailsState = {
+    title: string;
+    image: string;
+    score: number;
+}
+
+export class Home extends Component<HomeProps, ReviewDetailsState>{
     constructor(props: HomeProps){
         super(props);
-        this.state = {};
+        this.state = {title: this.props.title, score: this.props.score, image: this.props.image};
     }
 
     render = (): JSX.Element => {
@@ -24,7 +33,10 @@ export class Home extends Component<HomeProps>{
                     <span className = "totalReview"> Total Reviews: </span>
                 </div>
                 <div className = "reviews">
-                    <AddReview onClick={this.props.addReview}/>
+                    <AddReview onClick={this.doAddReviewClick}
+                    title={this.state.title}
+                    image={this.state.image}
+                    score={this.state.score}/>
                 </div>
             </body>
             <footer className="Footer"></footer>

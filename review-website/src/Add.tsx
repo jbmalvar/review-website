@@ -5,6 +5,8 @@ import './Add.css';
 type AddProps = {
     back: () => void;
     addTitle:(word:string)=> void;
+    image:string;
+    score:number;
 }
 
 type AddState = {
@@ -31,6 +33,7 @@ export class Add extends Component<AddProps, AddState> {
             artScore:0,
             score: 0
         };
+        this.setState({score: (this.state.characterScore + this.state.ostScore + this.state.artScore + this.state.storyScore) / 4});
     }
 
     render = (): JSX.Element => {
@@ -168,9 +171,9 @@ export class Add extends Component<AddProps, AddState> {
     }
 
     doAddTitleClick = (): void =>{
-        this.props.addTitle(this.state.title);
         const title = document.getElementById("titleInput") as HTMLInputElement
-        this.setState({title: title.value})
+        this.setState({title: title.value});
+        this.props.addTitle(title.value);
     }
 
     doAddImageClick = (): void => {
