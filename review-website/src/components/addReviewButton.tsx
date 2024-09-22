@@ -19,7 +19,7 @@ export const AddReview = ({onClick, title, image, score}: AddReviewProps): JSX.E
     <button className="addReviewButton" 
     style={{
         backgroundImage: `url(${image})`,
-        backgroundSize: `cover`,
+        backgroundSize: `contain`,
         backgroundPosition: `center`,
         backgroundRepeat: `no-repeat`
     }} 

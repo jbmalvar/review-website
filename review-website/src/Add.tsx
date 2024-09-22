@@ -1,4 +1,4 @@
-import React, {ChangeEvent, Component} from "react";
+import React, {ChangeEvent, ChangeEventHandler, Component} from "react";
 import { Back } from "./components/backButton";
 import './Add.css';
 
@@ -6,7 +6,7 @@ type AddProps = {
     back: () => void;
     addTitle:(word:string)=> void;
     addImage:(image:string)=> void;
-    score:number;
+    addScore:(score: number)=> void;
 }
 
 type AddState = {
@@ -34,6 +34,7 @@ export class Add extends Component<AddProps, AddState> {
             score: 0
         };
         this.setState({score: (this.state.characterScore + this.state.ostScore + this.state.artScore + this.state.storyScore) / 4});
+        this.props.addScore(this.state.score);
     }
 
     render = (): JSX.Element => {
@@ -74,7 +75,7 @@ export class Add extends Component<AddProps, AddState> {
                                     <div className="characterTop">
                                         <div>
                                             <label>Characters: </label>
-                                            <select className = "dropdown" id="dropdown">
+                                            <select className = "dropdown" id="dropdown" value={this.state.characterScore} onChange={this.doCharacterScoreChange}>
                                                 <option value = "" selected></option>
                                                 <option value = "1" >1</option>
                                                 <option value = "2" >2</option>
@@ -93,7 +94,7 @@ export class Add extends Component<AddProps, AddState> {
                                     <div className="ostTop">
                                         <div>
                                             <label>OST: </label>
-                                            <select className = "dropdown" id="dropdown">
+                                            <select className = "dropdown" id="dropdown" onChange={this.doOstScoreChange}>
                                                 <option value = "" selected></option>
                                                 <option value = "1" >1</option>
                                                 <option value = "2" >2</option>
@@ -114,7 +115,7 @@ export class Add extends Component<AddProps, AddState> {
                                     <div className="storyBot">
                                         <div>
                                             <label>Story: </label>
-                                            <select className = "dropdown" id="dropdown">
+                                            <select className = "dropdown" id="dropdown" onChange={this.doStoryScoreChange}>
                                                 <option value = "" selected></option>
                                                 <option value = "1" >1</option>
                                                 <option value = "2" >2</option>
@@ -133,7 +134,7 @@ export class Add extends Component<AddProps, AddState> {
                                     <div className="artBot">
                                         <div>
                                             <label>Art: </label>
-                                            <select className = "dropdown" id="dropdown">
+                                            <select className = "dropdown" id="dropdown" onChange={this.doArtScoreChange}>
                                                 <option value = "" selected></option>
                                                 <option value = "1" >1</option>
                                                 <option value = "2" >2</option>
@@ -182,7 +183,39 @@ export class Add extends Component<AddProps, AddState> {
         this.props.addImage(image.value);
     }
 
-    doCharacterScoreChange = (): void => {
+    doCharacterScoreChange = (evt: ChangeEvent<HTMLSelectElement>): void => {
+        const value = parseInt(evt.target.value);
+        this.setState({characterScore: value}, () => {
+            this.setState({score: ((this.state.characterScore + this.state.artScore + this.state.ostScore + this.state.storyScore) / 4)}, () => {
+                this.props.addScore(this.state.score)
+            })
+        });
+    }
 
+    doStoryScoreChange = (evt: ChangeEvent<HTMLSelectElement>): void => {
+        const value = parseInt(evt.target.value);
+        this.setState({storyScore: value}, () => {
+            this.setState({score: ((this.state.characterScore + this.state.artScore + this.state.ostScore + this.state.storyScore) / 4)}, () => {
+                this.props.addScore(this.state.score)
+            })
+        });
+    }
+
+    doOstScoreChange = (evt: ChangeEvent<HTMLSelectElement>): void => {
+        const value = parseInt(evt.target.value);
+        this.setState({ostScore: value}, () => {
+            this.setState({score: ((this.state.characterScore + this.state.artScore + this.state.ostScore + this.state.storyScore) / 4)}, () => {
+                this.props.addScore(this.state.score)
+            })
+        });
+    }
+
+    doArtScoreChange = (evt: ChangeEvent<HTMLSelectElement>): void => {
+        const value = parseInt(evt.target.value);
+        this.setState({artScore: value}, () => {
+            this.setState({score: ((this.state.characterScore + this.state.artScore + this.state.ostScore + this.state.storyScore) / 4)}, () => {
+                this.props.addScore(this.state.score)
+            })
+        });
     }
 }
